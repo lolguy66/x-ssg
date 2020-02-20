@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css.css">
+    <title>My Recipes</title>
+</head>
+<body class="container" style="background-color: khaki;">
+    {% include "header.html" %}
+    {% block content %} {% endblock %}
+</body>
+
+<div class="col-3">
+
+    {% for post in posts %}
+    <main class="card stretch">
+        <header>
+            <img src="{{ post.thumbnail }}">
+        </header>
+        <article>
+            <h2>{{ post.title }}</h2>
+            <small>{{ post.date }}</small>
+            <p>
+                {{ post.summary}}
+            </p>
+            <a class="mybutton" href="posts/{{ post.slug }}.html">Recipe</a>
+            <br>
+            {% set list_of_tags = post.tags.split(",") %}
+            {% for tag in list_of_tags %}
+                <button class="mytag">{{ tag }}</button>
+            {% endfor %}
+        </article>
+                
+    </main>
+    <!-- 
+        <p>
+                <h2>{{loop.index}}: <a href="posts/{{ post.slug }}.html">{{post.title}}</a> <small>{{post.date}}</small></h2>
+                {{post.summary}}
+            </p> -->
+    
+    {% endfor %}
+    
+    </div>
+</html>
